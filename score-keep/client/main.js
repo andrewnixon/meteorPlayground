@@ -1,24 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
+import {Tracker} from 'meteor/tracker';
 
-const players = [{
-  _id: '1',
-  name: 'Marjorie',
-  score: 99
-}, {
-  _id: '2',
-  name: 'Beatrice',
-  score: -1
-}, {
-  _id: '3',
-  name: 'Andrew',
-  score: -12
-}, {
-  _id: '4',
-  name: 'Arthur',
-  score: 56
-}];
+import {Players} from './../imports/api/players';
+
+Tracker.autorun(function() {
+  console.log('Players list', Players.find().fetch());
+});
+
+const renderPlayers = function (playersList) {
+  return playersList.map(function (player) {
+    return <p key={player._id}>{player.name} has {player.score} point(s).</p>;
+  });
+};
 
 Meteor.startup(function (){
   let title = 'Score Keep';
@@ -29,7 +24,7 @@ Meteor.startup(function (){
       <h1>{title}</h1>
       <p>Hello {name}!</p>
       <p>This is a second paragraph.</p>
-      {[<p key="1">1</p>, <p key="2">2</p>, <p key="3">3</p>]}
+      {renderPlayers(players)}
     </div>
   );
 

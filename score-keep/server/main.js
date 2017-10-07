@@ -1,6 +1,13 @@
-import {greetUser} from './../imports/utils';
-import defaultAdd, {add} from './../imports/math';
+import {Meteor} from 'meteor/meteor';
+import {Players} from './../imports/api/players';
 
-console.log('log from /server/main.js');
-console.log(greetUser());
-console.log(defaultAdd(5,4));
+Meteor.startup(function (){
+  console.log('Started...');
+
+  Players.insert({
+    name: 'Marjorie',
+    score: 99
+  });
+
+  console.log(Players.find().fetch());
+});

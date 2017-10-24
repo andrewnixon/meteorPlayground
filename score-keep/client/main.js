@@ -11,6 +11,21 @@ const renderPlayers = function (playersList) {
   });
 };
 
+const handleSubmit = function (e) {
+  let playerName = e.target.playerName.value;
+
+  e.preventDefault();
+
+  if (playerName){
+    e.target.playerName.value = '';
+
+    Players.insert({
+      name: playerName,
+      score: 0
+    });
+  }
+};
+
 Meteor.startup(function (){
   Tracker.autorun(function() {
     console.log('Players list', Players.find().fetch());
@@ -25,6 +40,10 @@ Meteor.startup(function (){
         <p>Hello {name}!</p>
         <p>This is a second paragraph.</p>
         {renderPlayers(players)}
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="playerName" placeholder="Player Name"/>
+          <button>Add Player</button>
+        </form>
       </div>
     );
 

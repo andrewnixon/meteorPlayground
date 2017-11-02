@@ -1,1 +1,15 @@
 /* CSS declarations go here */
+body {
+  background: url(https://wallpaperscraft.com/image/paper_patterns_backgrounds_textures_lines_36212_1920x1080.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  color: #862A12;
+
+  font-family: 'Montserrat', sans-serif;
+}
+
+.main {
+  background: #EFDBAD;
+  padding: 5px;
+}

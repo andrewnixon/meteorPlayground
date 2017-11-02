@@ -5,13 +5,13 @@ import {Tracker} from 'meteor/tracker';
 
 import {Players} from './../imports/api/players';
 
-const renderPlayers = function (playersList) {
-  return playersList.map(function (player) {
+const renderPlayers = (playersList) => {
+  return playersList.map((player) => {
     return <p key={player._id}>{player.name} has {player.score} point(s).</p>;
   });
 };
 
-const handleSubmit = function (e) {
+const handleSubmit = (e) => {
   let playerName = e.target.playerName.value;
 
   e.preventDefault();
@@ -26,8 +26,8 @@ const handleSubmit = function (e) {
   }
 };
 
-Meteor.startup(function (){
-  Tracker.autorun(function() {
+Meteor.startup(() => {
+  Tracker.autorun(() => {
     console.log('Players list', Players.find().fetch());
     var players = Players.find().fetch();
 
@@ -38,7 +38,6 @@ Meteor.startup(function (){
         {/* Render h1 tag with title var as text */}
         <h1>{title}</h1>
         <p>Hello {name}!</p>
-        <p>This is a second paragraph.</p>
         {renderPlayers(players)}
         <form onSubmit={handleSubmit}>
           <input type="text" name="playerName" placeholder="Player Name"/>

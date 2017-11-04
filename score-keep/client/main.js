@@ -20,22 +20,6 @@ const renderPlayers = (playersList) => {
   });
 };
 
-const handleSubmit = (e) => {
-  let playerName = e.target.playerName.value;
-
-  e.preventDefault();
-
-  if (playerName){
-    e.target.playerName.value = '';
-
-    Players.insert({
-      name: playerName,
-      score: 0
-    });
-  }
-};
-
-
 Meteor.startup(() => {
   Tracker.autorun(() => {
     var players = Players.find().fetch();
@@ -46,11 +30,7 @@ Meteor.startup(() => {
         {/* Render h1 tag with title var as text */}
         <TitleBar title={title} subtitle="Created by Andrew Nixon"/>
         {renderPlayers(players)}
-        <AddPlayer/>
-        <form onSubmit={handleSubmit}>
-          <input type="text" name="playerName" placeholder="Player Name"/>
-          <button>Add Player</button>
-        </form>
+        <AddPlayer score={0}/>
       </div>
     );
 

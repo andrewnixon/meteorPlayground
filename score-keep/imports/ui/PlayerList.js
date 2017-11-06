@@ -11,17 +11,19 @@ const renderPlayers = (playersList) => {
 
 export default class PlayerList extends React.Component {
   renderPlayers() {
-    return this.props.players.map((player) => {
-      return <Player key={player._id} player={player}/>;
-    });
+    if (this.props.players.length === 0) {
+      return <p>Add a player to get started!</p>;
+    } else {
+      return this.props.players.map((player) => {
+        return <Player key={player._id} player={player}/>;
+      });
+    }
   }
 
   render() {
-    return (
-      <div>
+    return (<div>
       {this.renderPlayers()}
-      </div>
-    );
+    </div>);
   }
 }
 
